@@ -1,0 +1,158 @@
+{
+    "Wondambong": {
+        occupation: "government official",
+        "Maufor": {
+            dead: true,
+            children: {
+                "Thomas": {
+                    "occupation": "Doctorate medical doctor",
+                    "Antoinette":{
+                    },
+                    "Samuel":{
+                    },
+                    "Felicia":{
+                    },
+                    "Thomas Nchofor Jr.":{
+                    }
+                },
+                "Lydia":{
+                    "occupation": "married after elementary school",
+                    children: {
+                        "Emmanuel": {},
+                        "Dennis": {},
+                        "Alycius": {
+                            occupation: "PhD. Physics"
+                        }, 
+                        "Joeseph": {},
+                        "Annie": {},
+                        "Soloman": {},
+                    }
+                },
+                "James": {
+                    "occupation": "Gendarmerei rural police force",
+                    children: {
+                        "Collete": {},
+                    "Thomas": {},
+                    "Allen Thomas": {},
+                    "Adele": {"alive": false},
+                    "Antony": {},
+                    }
+                }
+            }
+        },
+        "Francisca": {
+            dead: true,
+            children: {
+                "Albert": {
+                    dead: true,
+                    occupation: "Electrical Engineer Phd.",
+                    children: {
+                        "Yotu": {},
+                        "Tanesop Wondambong": {
+                            nickname: "Wondi"
+                        },
+                        "Kaba": {},
+                    }
+                },
+                "John": {
+                    occupation: "teacher",
+                    children: {
+                        "Yotu": {},
+                    }
+                },
+                "Ester": {
+                    occupation: "nurse",
+                    children: {
+                        "Tani": {},
+                        "Mafolock": {},
+                        "Peter Jr": {},
+                        "Maureen": {
+                            children: {
+                                "Terrence": {}
+                            }
+                        },
+                    }
+                },
+                "Maureen": {
+                    occupation: "finished secondary school",
+                },
+        }
+        },
+        "Ruth": {
+            dead: true,
+            children: {
+                "Christine": {
+                    children: ["Barry"]
+                },
+                "Olga": {
+                    children: ["Thomas", "Andrienne"]
+                },
+                "Susanne": {
+                    children: {
+                        "Emmanuel": {
+                            occupation: "medical doctor Md."
+                        },
+                        "Samuel": {
+                            occupation: "computer guy"
+                        },
+                    }
+                },
+                "Charles": {
+                    occupation: "automobile sales guy",
+                    children: {
+                        "Bianca": {},
+                        "Yasmin": {},
+                        "Giles": {
+                            dead: true
+                        },
+                },
+            }
+        },
+        "Pauline": {
+            children: {
+                "Leo": {
+                    children: {
+                        "Calvin": {},
+                        "Gisline": {},
+                        "Thomas": {},
+                    }
+                },
+                "Abraham": {
+                    children: {
+                        "Rosaline": {},
+                        "George": {},
+                        "Ezekiel": {},
+                        "Osée"
+                    }
+                }
+            }
+        },
+        "Madeline Nkazi": {
+            children: {
+                "Jacob": {},
+                "George": {
+                    occupation: "Electrical Engineeer",
+                    children: {
+                        "Doris": {},
+                        "Laura Nkazi": {},
+                        "Gael": {}
+                    }
+                },
+                "Zacharia Nchinda":{
+                    occupation: "history professor Phd.",
+                    children: {
+                        "Nchinda Nchinda": {
+                            occupation: "Computer Scientist"
+                        },
+                        "Nkaziewoh Ndabong": {
+                            occupation: "student"
+                        },
+                        "Nzuekoh Nvepowoh": {
+                            occupation: "student"
+                        },
+                    }
+                },
+            }
+        }
+    }
+}
