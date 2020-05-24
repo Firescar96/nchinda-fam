@@ -1,7 +1,11 @@
-import path from 'path';
-import fastify from 'fastify'
-import gzipStatic from 'connect-gzip-static'
-import agent from './routes/agent.js'
+const moduleAlias = require('module-alias');
+moduleAlias.addPath('./src')
+moduleAlias()
+
+const fastify = require('fastify');
+const gzipStatic = require('connect-gzip-static');
+const agent = require('./routes/agent.js');
+
 
 const app = fastify({
     logger: true

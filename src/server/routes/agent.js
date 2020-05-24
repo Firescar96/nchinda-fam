@@ -1,13 +1,14 @@
-
-import fastify from 'fastify'
+const Agent = require('models/Agent.js');
 
 const router = function (instance, opts, done) {
     console.log('in router')
-    instance.get('/search', function (request, reply) {
-        reply.send({ prefix: instance.prefix })
+    instance.get('/metadata', async function (request, reply) {
+        const agents = await Agent.find({});
+        const jsonData = agents.map(x => x.toJSON())
+        reply.send({ result: jsonData })
     })
 
     done()
 }
 
-export default router
+module.exports = router

@@ -1,13 +1,13 @@
 
-import fs from 'fs';
+const fs = require('fs');
 
 let doc1 = JSON.parse(fs.readFileSync('./unknown-1.json'));
 let doc2 = JSON.parse(fs.readFileSync('./unknown-2.json'));
 let doc3 = JSON.parse(fs.readFileSync('./unknown-3.json'));
 let doc4 = JSON.parse(fs.readFileSync('./wondambong.json'));
 
-import Agent from '../src/models/Agent.js'
-import mongoose from 'mongoose';
+const Agent = require('../src/models/Agent.js')
+const mongoose = require('mongoose')
 
 async function main() {
     const members = [];
@@ -49,6 +49,8 @@ async function main() {
         members.push(agent)
         await agent.save()
     }
+    
+    console.log('update complete')
 }
 
 main()
