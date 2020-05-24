@@ -1,13 +1,14 @@
 {
     "unknown-3": {
-        occupation: "government official",
-        "Ruth": {
-            dead: true,
-                "Sylvester": {
-                    dead: true,
-                    children: {},
-                },
+        "occupation": "government official",
+        "children": {
+            "Ruth": {
+                "dead": true,
+                    "Sylvester": {
+                        "dead": true,
+                        "children": {}
+                    }
             }
-        },
+        }
     }
 }

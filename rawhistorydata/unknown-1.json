@@ -1,21 +1,23 @@
 {
     "unknown-1": {
-        "Madeline Nkazi": {
-            children: {
-                "Gregory": {
-                    "occupation": "church evangelist",
-                    children: {
-                        "Laura": {},
-                        "George": {},
-                    }
-                },
-                "John": {
-                    dead: true,
-                    children: {
-                        "Ullrich": {},
-                        "Richard": {},
-                        "Dzenabou": {},
-                        "Adijatou": {}
+        "children": {
+            "Madeline Nkazi": {
+                "children": {
+                    "Gregory": {
+                        "occupation": "church evangelist",
+                        "children": {
+                            "Laura": {},
+                            "George": {}
+                        }
+                    },
+                    "John": {
+                        "dead": true,
+                        "children": {
+                            "Ullrich": {},
+                            "Richard": {},
+                            "Dzenabou": {},
+                            "Adijatou": {}
+                        }
                     }
                 }
             }
