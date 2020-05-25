@@ -9,12 +9,6 @@
   ],
   "plugins": [
     "transform-vue-jsx", "@babel/plugin-transform-runtime", ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-syntax-dynamic-import",   [
-      "babel-plugin-root-import",
-      {
-        "rootPathSuffix": "./",
-        "rootPathPrefix": "@/"
-      }
-    ]
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

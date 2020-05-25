@@ -5,6 +5,7 @@ moduleAlias()
 const fastify = require('fastify');
 const gzipStatic = require('connect-gzip-static');
 const agent = require('./routes/agent.js');
+const fastifyCORS = require('fastify-cors');
 
 
 const app = fastify({
@@ -22,10 +23,12 @@ app.get('/', (request, reply) => {
 })
 
 // Run the server!
-app.listen(3000, (err, address) => {
+app.listen(8080, (err, address) => {
     if (err) throw err
     app.log.info(`server listening on ${address}`)
 })
 
-console.log('send agent', agent)
+app.register(fastifyCORS, { 
+    // put your options here
+})
 app.register(agent, { prefix: '/agent' })

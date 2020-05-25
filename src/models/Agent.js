@@ -6,10 +6,6 @@ mongoose.connect('mongodb://localhost/master', {
   useUnifiedTopology: true,
 });
 const schema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-    alias: '_id'
-  },
   name: String,
   dead: Boolean,
   children: [{type: Schema.Types.ObjectId, ref: 'Agent'}],
@@ -22,6 +18,7 @@ class AgentSchema {
 
   toJSON() {
     const jsonData = {}
+    console.log(this._id, this.id)
     this.publicFields.forEach(x => {
       jsonData[x] = this[x]
     })
