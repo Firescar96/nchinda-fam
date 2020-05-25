@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+require('./Base');
 
-mongoose.connect('mongodb://localhost/master', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 const schema = new Schema({
   name: String,
   dead: Boolean,
@@ -18,7 +15,6 @@ class AgentSchema {
 
   toJSON() {
     const jsonData = {}
-    console.log(this._id, this.id)
     this.publicFields.forEach(x => {
       jsonData[x] = this[x]
     })
