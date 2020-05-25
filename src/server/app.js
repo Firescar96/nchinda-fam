@@ -12,15 +12,10 @@ const app = fastify({
     logger: true
 })
 
+// load frontend routes
 const staticPath = './dist';
 app.use('/', gzipStatic(staticPath));
 app.use('/*', gzipStatic(staticPath));
-
-  
-// Declare a route
-app.get('/', (request, reply) => {
-    reply.send({ hello: 'world' })
-})
 
 // Run the server!
 app.listen(8080, (err, address) => {
@@ -28,7 +23,6 @@ app.listen(8080, (err, address) => {
     app.log.info(`server listening on ${address}`)
 })
 
-app.register(fastifyCORS, { 
-    // put your options here
-})
+// load backend routes
+app.register(fastifyCORS)
 app.register(agent, { prefix: '/agent' })
