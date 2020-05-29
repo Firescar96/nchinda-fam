@@ -10,7 +10,7 @@
 <script>
 import axios from 'axios'
 import Component from 'vue-class-component';
-import {select, forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide, zoom, event} from 'd3';
+import {select, forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide, zoom,zoomIdentity, event} from 'd3';
 
 @Component
 class TreeVisualization {
@@ -60,7 +60,7 @@ class TreeVisualization {
     this.links = links;
       
     // tie together top level nodes so they don't drift too far apart
-    const rootNode = {name: 'root', id: 'root', x: 0, y:0}
+    const rootNode = {name: 'root', id: 'root', fx: 0, fy:0}
     this.nodes.push(rootNode);
     topLevelNodes.forEach(nodeId => {
       this.links.push({source: 'root', target: nodeId})
@@ -120,7 +120,8 @@ class TreeVisualization {
           .html(d => d.name)
 
       });
-
+    // svg.call(zoom.transform, zoomIdentity.translate(0, 0).scale(.5));
+    console.log(zoom.transform)
     let svgZoom = zoom()
       .on('zoom', d => {
         zoomContainer.attr('transform', event.transform);
