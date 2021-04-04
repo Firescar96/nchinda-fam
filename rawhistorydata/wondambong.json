@@ -12,11 +12,14 @@
                         "Samuel":{
                         },
                         "Felicia":{
+                            "birth": "03/01/1971",
+                            "locality": "USA"
                         },
                         "Thomas Nchofor Jr.":{
                         }
                     },
                     "Lydia":{
+                        "birth": "01/27/1989",
                         "occupation": "married after elementary school",
                         "children": {
                             "Emmanuel": {},
@@ -35,8 +38,11 @@
                             "Collete": {},
                         "Thomas": {},
                         "Allen Thomas": {},
-                        "Adele": {"alive": false},
-                        "Antony": {}
+                        "Adele": {
+                            "alive": false,
+                            "death": "2001"
+                        },
+                        "Anthony": {}
                         }
                     }
                 }

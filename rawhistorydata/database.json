@@ -1,0 +1,497 @@
+[
+  {
+    "id": "604d8ce639154e75e32a5c55",
+    "parent": null,
+    "name": "Wondambong",
+    "occupation": "government official",
+    "depth": 0
+  },
+  {
+    "id": "604d8ce639154e75e32a5c57",
+    "parent": "604d8ce639154e75e32a5c55",
+    "name": "Madeline Nkazi",
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5c59",
+    "parent": "604d8ce639154e75e32a5c57",
+    "name": "Zacharia Nchinda",
+    "occupation": "history professor Phd.",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c5b",
+    "parent": "604d8ce639154e75e32a5c59",
+    "name": "Nzuekoh Nvepowoh",
+    "occupation": "student",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c5d",
+    "parent": "604d8ce639154e75e32a5c59",
+    "name": "Nkaziewoh Ndabong",
+    "occupation": "student",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c5f",
+    "parent": "604d8ce639154e75e32a5c59",
+    "name": "Nchinda Nchinda",
+    "occupation": "Computer Scientist",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c61",
+    "parent": "604d8ce639154e75e32a5c57",
+    "name": "George",
+    "occupation": "Electrical Engineeer",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c63",
+    "parent": "604d8ce639154e75e32a5c61",
+    "name": "Gael",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c65",
+    "parent": "604d8ce639154e75e32a5c61",
+    "name": "Laura Nkazi",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c67",
+    "parent": "604d8ce639154e75e32a5c61",
+    "name": "Doris",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c69",
+    "parent": "604d8ce639154e75e32a5c57",
+    "name": "Jacob",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c6b",
+    "parent": "604d8ce639154e75e32a5c55",
+    "name": "Pauline",
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5c6d",
+    "parent": "604d8ce639154e75e32a5c6b",
+    "name": "Abraham",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c6f",
+    "parent": "604d8ce639154e75e32a5c6d",
+    "name": "Osée",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c71",
+    "parent": "604d8ce639154e75e32a5c6d",
+    "name": "Ezekiel",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c73",
+    "parent": "604d8ce639154e75e32a5c6d",
+    "name": "George",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c75",
+    "parent": "604d8ce639154e75e32a5c6d",
+    "name": "Rosaline",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c77",
+    "parent": "604d8ce639154e75e32a5c6b",
+    "name": "Leo",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c79",
+    "parent": "604d8ce639154e75e32a5c77",
+    "name": "Thomas",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c7b",
+    "parent": "604d8ce639154e75e32a5c77",
+    "name": "Gisline",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c7d",
+    "parent": "604d8ce639154e75e32a5c77",
+    "name": "Calvin",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c7f",
+    "parent": "604d8ce639154e75e32a5c55",
+    "name": "Ruth",
+    "dead": true,
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5c81",
+    "parent": "604d8ce639154e75e32a5c7f",
+    "name": "Charles",
+    "occupation": "automobile sales guy",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c83",
+    "parent": "604d8ce639154e75e32a5c81",
+    "name": "Giles",
+    "dead": true,
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c85",
+    "parent": "604d8ce639154e75e32a5c81",
+    "name": "Yasmin",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c87",
+    "parent": "604d8ce639154e75e32a5c81",
+    "name": "Bianca",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c89",
+    "parent": "604d8ce639154e75e32a5c7f",
+    "name": "Susanne",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c8b",
+    "parent": "604d8ce639154e75e32a5c89",
+    "name": "Samuel",
+    "occupation": "computer guy",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c8d",
+    "parent": "604d8ce639154e75e32a5c89",
+    "name": "Emmanuel",
+    "occupation": "medical doctor Md.",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c8f",
+    "parent": "604d8ce639154e75e32a5c7f",
+    "name": "Olga",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c91",
+    "parent": "604d8ce639154e75e32a5c8f",
+    "name": "Andrienne",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c93",
+    "parent": "604d8ce639154e75e32a5c8f",
+    "name": "Thomas",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c95",
+    "parent": "604d8ce639154e75e32a5c7f",
+    "name": "Christine",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c97",
+    "parent": "604d8ce639154e75e32a5c95",
+    "name": "Barry",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5c99",
+    "parent": "604d8ce639154e75e32a5c55",
+    "name": "Francisca",
+    "dead": true,
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5c9b",
+    "parent": "604d8ce639154e75e32a5c99",
+    "name": "Maureen",
+    "occupation": "finished secondary school",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c9d",
+    "parent": "604d8ce639154e75e32a5c99",
+    "name": "Ester",
+    "occupation": "nurse",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5c9f",
+    "parent": "604d8ce639154e75e32a5c9d",
+    "name": "Maureen",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ca1",
+    "parent": "604d8ce639154e75e32a5c9f",
+    "name": "Terrence",
+    "depth": 4
+  },
+  {
+    "id": "604d8ce639154e75e32a5ca3",
+    "parent": "604d8ce639154e75e32a5c9d",
+    "name": "Peter Jr",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ca5",
+    "parent": "604d8ce639154e75e32a5c9d",
+    "name": "Mafolock",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ca7",
+    "parent": "604d8ce639154e75e32a5c9d",
+    "name": "Tani",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ca9",
+    "parent": "604d8ce639154e75e32a5c99",
+    "name": "John",
+    "occupation": "teacher",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5cab",
+    "parent": "604d8ce639154e75e32a5ca9",
+    "name": "Yotu",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cad",
+    "parent": "604d8ce639154e75e32a5c99",
+    "name": "Albert",
+    "dead": true,
+    "occupation": "Electrical Engineer Phd.",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5caf",
+    "parent": "604d8ce639154e75e32a5cad",
+    "name": "Kaba",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cb1",
+    "parent": "604d8ce639154e75e32a5cad",
+    "name": "Tanesop Wondambong",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cb3",
+    "parent": "604d8ce639154e75e32a5cad",
+    "name": "Yotu",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cb5",
+    "parent": "604d8ce639154e75e32a5c55",
+    "name": "Maufor",
+    "dead": true,
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5cb7",
+    "parent": "604d8ce639154e75e32a5cb5",
+    "name": "James",
+    "occupation": "Gendarmerei rural police force",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5cb9",
+    "parent": "604d8ce639154e75e32a5cb7",
+    "name": "Anthony",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cbb",
+    "parent": "604d8ce639154e75e32a5cb7",
+    "name": "Adele",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cbd",
+    "parent": "604d8ce639154e75e32a5cb7",
+    "name": "Allen Thomas",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cbf",
+    "parent": "604d8ce639154e75e32a5cb7",
+    "name": "Thomas",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cc1",
+    "parent": "604d8ce639154e75e32a5cb7",
+    "name": "Collete",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cc3",
+    "parent": "604d8ce639154e75e32a5cb5",
+    "name": "Lydia",
+    "occupation": "married after elementary school",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5cc5",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Soloman",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cc7",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Annie",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cc9",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Joeseph",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ccb",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Alycius",
+    "occupation": "PhD. Physics",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ccd",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Dennis",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ccf",
+    "parent": "604d8ce639154e75e32a5cc3",
+    "name": "Emmanuel",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cd1",
+    "parent": "604d8ce639154e75e32a5cb5",
+    "name": "Thomas",
+    "occupation": "Doctorate medical doctor",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5cd3",
+    "parent": null,
+    "name": "unknown-3",
+    "occupation": "government official",
+    "depth": 0
+  },
+  {
+    "id": "604d8ce639154e75e32a5cd5",
+    "parent": "604d8ce639154e75e32a5cd3",
+    "name": "Ruth",
+    "dead": true,
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5cd7",
+    "parent": null,
+    "name": "unknown-2",
+    "depth": 0
+  },
+  {
+    "id": "604d8ce639154e75e32a5cd9",
+    "parent": "604d8ce639154e75e32a5cd7",
+    "name": "Francisca",
+    "dead": true,
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5cdb",
+    "parent": "604d8ce639154e75e32a5cd9",
+    "name": "Grace",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5cdd",
+    "parent": null,
+    "name": "unknown-1",
+    "depth": 0
+  },
+  {
+    "id": "604d8ce639154e75e32a5cdf",
+    "parent": "604d8ce639154e75e32a5cdd",
+    "name": "Madeline Nkazi",
+    "depth": 1
+  },
+  {
+    "id": "604d8ce639154e75e32a5ce1",
+    "parent": "604d8ce639154e75e32a5cdf",
+    "name": "John",
+    "dead": true,
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5ce3",
+    "parent": "604d8ce639154e75e32a5ce1",
+    "name": "Adijatou",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ce5",
+    "parent": "604d8ce639154e75e32a5ce1",
+    "name": "Dzenabou",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ce7",
+    "parent": "604d8ce639154e75e32a5ce1",
+    "name": "Richard",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ce9",
+    "parent": "604d8ce639154e75e32a5ce1",
+    "name": "Ullrich",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5ceb",
+    "parent": "604d8ce639154e75e32a5cdf",
+    "name": "Gregory",
+    "occupation": "church evangelist",
+    "depth": 2
+  },
+  {
+    "id": "604d8ce639154e75e32a5ced",
+    "parent": "604d8ce639154e75e32a5ceb",
+    "name": "George",
+    "depth": 3
+  },
+  {
+    "id": "604d8ce639154e75e32a5cef",
+    "parent": "604d8ce639154e75e32a5ceb",
+    "name": "Laura",
+    "depth": 3
+  }
+]

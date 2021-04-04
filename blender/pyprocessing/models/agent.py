@@ -8,7 +8,7 @@ BRANCH_LENGTH = 15
 
 dir_path = pathlib.Path(__file__).parent.absolute()
 
-desired_objects = ['Trunk', 'size reference', 'mind']
+desired_objects = ['Trunk']
 
 collection = bpy.context.collection
 
@@ -28,12 +28,11 @@ class Agent():
         self.scale = 1
         self.length = BRANCH_LENGTH
         self.phi = 0
-        self.radius = 1000
         self.blender_objects = {}
         self.initialize_blender_objects()
 
     def initialize_blender_objects(self):
-        with bpy.data.libraries.load(os.path.join(dir_path, '../../blends/treesection.blend'), link=True) as (src, dst):
+        with bpy.data.libraries.load(os.path.join(dir_path, '../../blends/treesection-rendered.blend'), link=True) as (src, dst):
             dst.objects = [x for x in desired_objects]
 
         for obj_name in desired_objects:
@@ -44,7 +43,6 @@ class Agent():
 
         self.location = self.blender_objects['Trunk'].location
         self.blender_objects['Trunk'].rotation_mode = 'AXIS_ANGLE'
-        print('self.location', self.location)
 
     #recursive function that updates the positions of all of this node's children
     def recompute_positions(self):
@@ -52,16 +50,15 @@ class Agent():
         # X the position along the trunk of the parent
         # Theta the angle the child will make relative to the parent as it branches off
         # Phi the position of the child around the trunk
-        
+        self.blender_objects['Trunk'].location = self.location
+
         for i, child in enumerate(self.children):
             child.length = self.length /2
-            child.scale = self.scale * .75
+            child.scale = self.scale * .5
             child.theta = math.radians(45)
             child.phi = (math.pi*2) *i /len(self.children)
-            # print('child.phi', child.phi)
 
         for child in self.children:
-
 
             # set X
             self_direction_vector = self.orientation_vector.normalized()
@@ -87,3 +84,5 @@ class Agent():
             
             # child.blender_objects['Trunk'].rotation_euler = child.rotation_euler
             child.recompute_positions()
+
+        print('computed all children', self.name, self.children)

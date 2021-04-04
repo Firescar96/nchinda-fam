@@ -33,36 +33,32 @@ collection = bpy.context.collection
 
 bpy.data.objects.remove(bpy.data.objects.get('Cube'))
 
-desired_data = {
-    'materials': ['bark'], 
-    'meshes': ['body'], 
-    'curves': ['BezierCurve'], 
-    'textures': [],
-}
-
-with bpy.data.libraries.load(os.path.join(dir_path, '../blends/treesection-rendered.blend'), link=True) as (src, dst):
-    for data_field, field_values in desired_data.items():
-        setattr(dst, data_field, field_values)
-
 with open('../../rawhistorydata/database.json') as f:
     database_data = json.load(f)
 
 # testing_ids = ['604d8ce639154e75e32a5c55', '604d8ce639154e75e32a5c57', '604d8ce639154e75e32a5c59', '604d8ce639154e75e32a5c5b','604d8ce639154e75e32a5c6b', '604d8ce639154e75e32a5c61']
-testing_ids = [x['id'] for x in database_data[:18]]
+testing_ids = [x['id'] for x in database_data[:]]
 bpy.ops.object.transform_apply( rotation = True, location=True)
 
+roots = []
 agent_map = {d['id']:Agent(d) for d in database_data if d['id'] in testing_ids}
 for datum in agent_map.values():
+    print('hello', datum.parent, datum.id)
     if not datum.parent:
-        root = datum
+        print('set the root')
+        roots.append(datum)
         continue
     
     agent_map[datum.parent].children.append(datum)
-    
+
+
+
 
 # root = Agent(database_data[0])
 # root.children = [Agent(database_data[0]), Agent(database_data[1])]
-root.recompute_positions()
+for i, root in enumerate(roots):
+    root.location[0] +=  (i - len(roots)/2 + 1/len(roots)) * 10
+    root.recompute_positions()
 
 # Create a light
 light_data = bpy.data.lights.new('light', type='POINT')
@@ -77,7 +73,7 @@ scene.camera = cam
 # y controls roll
 # z controls left right yaw
 # cam starts on y axis pointing down
-cam.location = mathutils.Vector((0, -40, 7))
+cam.location = mathutils.Vector((0, -60, 7))
 cam.rotation_euler = mathutils.Euler((math.radians(90), 0, 0))
 
 # render settings355
