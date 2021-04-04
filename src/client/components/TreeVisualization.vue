@@ -1,30 +1,19 @@
 <template>
   <div id="treeVisualization" ref="treeVisualization">
     <div id="guide">
-      Guide:
-
-      <p>Click and drag to move around the tree.</p>
-      <p>Zoom in and out to focus on certain aspects.</p>
+      Welcome:
+      <p>Progress continues on the formation of nchinda.com, a digital representation of the Nchinda family.</p>
     </div>
-
-    <svg>
-      <g id="zoomContainer">
-        <g id="linksG" />
-        <line class="stem" stroke="yellow" x1="0" y1="2" x2="0" y2="-300" stroke-width="10" />
-        <g id="nodesG" />
-      </g>
-    </svg>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Component from 'vue-class-component';
-import {
-  select, forceSimulation, forceLink, forceManyBody, forceY, forceCollide, zoom, zoomIdentity, event,
-} from 'd3';
-import { AgentModel, SMALLNESS_MULTIPLIER } from '@/models/AgentModel';
-import AgentStore from '@/stores/AgentStore';
+import axios from "axios";
+import Component from "vue-class-component";
+import { AgentModel, SMALLNESS_MULTIPLIER } from "@/models/AgentModel";
+import * as THREE from "three/build/three.module.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import AgentStore from "@/stores/AgentStore";
 
 const BASE_NODE_RADIUS = 120;
 
@@ -34,130 +23,363 @@ class TreeVisualization {
     return {
       nodes: [],
       links: [],
+      renderer: null,
+      this: null,
+      camera: null,
+      cube: null
     };
   }
 
-  async created() {
-    this.simulation = forceSimulation()
-      //.alphaTarget(.5)
-      .force('charge', forceManyBody().strength(-20))
-      //.force('down', forceY(2000))
-      .force('collide', forceCollide(8));
+  // async created() {
+  //   //get the latest family tree data from the server
+  //   let dataLocation = `http://${window.location.hostname}`;
+  //   if (window.location.hostname == "localhost") {
+  //     dataLocation += ":8080";
+  //   }
+  //   dataLocation += "/agent/metadata";
+  //   const { data } = await axios.get(dataLocation);
 
+  //   //parse the data to update nodes/links in the graph
+  //   this.nodes = data.result.map(x => new AgentModel(x));
+  //   this.nodes.forEach(node => {
+  //     AgentStore.objectsById[node.id] = node;
+  //   });
 
-    //get the latest family tree data from the server
-    let dataLocation = `http://${window.location.hostname}`;
-    if(window.location.hostname == 'localhost') {
-      dataLocation += ':8080';
-    }
-    dataLocation += '/agent/metadata';
-    const { data } = await axios.get(dataLocation);
+  //   const topLevelNodes = new Set(this.nodes.map(x => x.id));
 
-    //parse the data to update nodes/links in the graph
-    this.nodes = data.result.map((x) => new AgentModel(x));
-    this.nodes.forEach((node) => {
-      AgentStore.objectsById[node.id] = node;
-    });
+  //   const links = [];
+  //   this.nodes.forEach(node => {
+  //     node.children = node.children.map(x => AgentStore.objectsById[x]);
 
-    const topLevelNodes = new Set(this.nodes.map((x) => x.id));
+  //     node.children.forEach(child => {
+  //       child.parent = node;
+  //       child.depth = node.depth + 1;
+  //       topLevelNodes.delete(child.id);
+  //       links.push({ source: node, target: child });
+  //     });
+  //   });
+  //   this.links = links;
 
-    const links = [];
-    this.nodes.forEach((node) => {
-      node.children = node.children.map((x) => AgentStore.objectsById[x]);
+  //   //tie together top level nodes so they don't drift too far apart
+  //   const rootNode = new AgentModel({
+  //     name: "root",
+  //     id: "root",
+  //     children: []
+  //   });
 
-      node.children.forEach((child) => {
-        child.parent = node;
-        child.depth = node.depth + 1;
-        topLevelNodes.delete(child.id);
-        links.push({ source: node, target: child });
-      });
-    });
-    this.links = links;
+  //   this.nodes.push(rootNode);
+  //   topLevelNodes.forEach(nodeId => {
+  //     const node = AgentStore.objectsById[nodeId];
+  //     rootNode.children.push(node);
+  //     this.links.push({ source: rootNode, target: node });
+  //     node.parent = rootNode;
+  //   });
 
-    //tie together top level nodes so they don't drift too far apart
-    const rootNode = new AgentModel({
-      name: 'root', id: 'root', fx: 0, fy: 0, children: [],
-    });
-    this.nodes.push(rootNode);
-    topLevelNodes.forEach((nodeId) => {
-      const node = AgentStore.objectsById[nodeId];
-      rootNode.children.push(node);
-      this.links.push({ source: rootNode, target: node });
-      node.parent = rootNode;
-    });
-
-
-    rootNode.recomputePositions();
-
-
-    //update simulation
-    //this.simulation.nodes(this.nodes);
+  //   rootNode.recomputePositions();
+  // }
+  animate() {
+    requestAnimationFrame(this.animate);
+    this.cube.rotation.x += 0.01;
+    this.cube.rotation.y += 0.01;
+    this.renderer.render(this.scene, this.camera);
   }
 
+  // mounted() {
+  //   this.scene = new THREE.Scene();
+  //   this.camera = new THREE.PerspectiveCamera(
+  //     75,
+  //     window.innerWidth / window.innerHeight,
+  //     0.1,
+  //     1000
+  //   );
+
+  //   this.renderer = new THREE.WebGLRenderer();
+  //   this.renderer.setSize(window.innerWidth, window.innerHeight);
+  //   this.$refs.treeVisualization.appendChild(this.renderer.domElement);
+
+  //   var geometry = new THREE.BoxGeoetry(1, 1, 1);
+  //   var material = new THREE.MeshBasicMaterial({ color: 0xad0202 });
+  //   this.cube = new THREE.Mesh(geometry, material);
+  //   this.scene.add(this.cube);
+
+  //   this.camera.position.z = 5;
+
+  //   this.animate();
+  // }
+
   mounted() {
-    const svg = select('#treeVisualization');
-    const zoomContainer = svg.select('#zoomContainer');
+    // Set our main variables
+    let scene,
+      renderer,
+      camera,
+      model, // Our character
+      neck, // Reference to the neck bone in the skeleton
+      waist, // Reference to the waist bone in the skeleton
+      possibleAnims, // Animations found in our file
+      mixer, // THREE.js animations mixer
+      idle, // Idle, the default state our character returns to
+      clock = new THREE.Clock(), // Used for anims, which run to a clock instead of frame rate
+      currentlyAnimating = false, // Used to check whether characters neck is being used in another anim
+      raycaster = new THREE.Raycaster(), // Used to detect the click on our character
+      loaderAnim = document.getElementById("js-loader");
 
-    this.simulation
-      .on('tick', () => {
-        zoomContainer
-          .select('#linksG')
-          .selectAll('line.link')
-          .data(this.links)
-          .join('line')
-          .attr('class', 'link')
-          .attr('x1', (d) => d.source.x)
-          .attr('y1', (d) => d.source.y)
-          .attr('x2', (d) => d.target.x)
-          .attr('y2', (d) => d.target.y)
-          .attr('stroke', 'yellow')
-          .attr('stroke-width', (d) => 5 * (SMALLNESS_MULTIPLIER ** d.source.depth));
+    let init = () => {
+      const backgroundColor = 0xf1f1f1;
 
-        const nodes = zoomContainer
-          .select('#nodesG')
-          .selectAll('g.node')
-          .data(this.nodes, (d) => d.id)
-          .attr('transform', (d) => `translate(${d.x},${d.y})`)
-          .style('opacity', (d) => (d.id == 'root' ? 0 : null));
+      // Init the scene
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(backgroundColor);
+      scene.fog = new THREE.Fog(backgroundColor, 60, 100);
 
-        nodes.exit().remove();
+      // Init the renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      // renderer.shadowMap.enabled = true;
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      this.$refs.treeVisualization.appendChild(renderer.domElement);
 
-        const nodesGraphic = nodes
-          .enter()
-          .append('g')
-          .attr('class', 'node');
+      // Add a camera
+      camera = new THREE.PerspectiveCamera(
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 30;
+      camera.position.x = 0;
+      camera.position.y = -3;
+      const MODEL_PATH =
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy_lightweight.glb";
 
-        nodesGraphic
-          .append('circle')
-          .attr('cx', 0)
-          .attr('cy', 0)
-          .attr('r', (d) => BASE_NODE_RADIUS * (SMALLNESS_MULTIPLIER ** d.depth))
-          .attr('stroke', 'green')
-          .attr('stroke-width', (d) => 5 * (SMALLNESS_MULTIPLIER ** d.depth));
+      let stacy_txt = new THREE.TextureLoader().load(
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy.jpg"
+      );
 
-        nodesGraphic
-          .append('foreignObject')
-          .style('width', (d) => BASE_NODE_RADIUS * 2 * (SMALLNESS_MULTIPLIER ** d.depth))
-          .style('height', (d) => BASE_NODE_RADIUS * 2 * (SMALLNESS_MULTIPLIER ** d.depth))
-          .attr('class', 'agentData')
-          .attr('x', (d) => -BASE_NODE_RADIUS * (SMALLNESS_MULTIPLIER ** d.depth))
-          .attr('y', (d) => -BASE_NODE_RADIUS * (SMALLNESS_MULTIPLIER ** d.depth))
-          .style('font-size', (d) => (BASE_NODE_RADIUS / 4) * (SMALLNESS_MULTIPLIER ** d.depth))
-          .append('xhtml:p')
-          .html((d) => d.name);
+      stacy_txt.flipY = false; // we flip the texture so that its the right way up
+
+      const stacy_mtl = new THREE.MeshPhongMaterial({
+        map: stacy_txt,
+        color: 0xffffff,
+        skinning: true
       });
 
-    const zoomObject = zoom()
-      .on('zoom', (d) => {
-        zoomContainer.attr('transform', event.transform);
+      var loader = new GLTFLoader();
+
+      loader.load(
+        MODEL_PATH,
+        function(gltf) {
+          model = gltf.scene;
+          let fileAnimations = gltf.animations;
+
+          model.traverse(o => {
+            if (o.isMesh) {
+              o.castShadow = true;
+              o.receiveShadow = true;
+              o.material = stacy_mtl;
+            }
+            // Reference the neck and waist bones
+            if (o.isBone && o.name === "mixamorigNeck") {
+              neck = o;
+            }
+            if (o.isBone && o.name === "mixamorigSpine") {
+              waist = o;
+            }
+          });
+
+          // Set the models initial scale
+          model.scale.set(7, 7, 7);
+          model.position.y = -10;
+
+          scene.add(model);
+
+          mixer = new THREE.AnimationMixer(model);
+          let idleAnim = THREE.AnimationClip.findByName(fileAnimations, "idle");
+          //remove neck and spine bones
+          idleAnim.tracks.splice(3, 3);
+          idleAnim.tracks.splice(9, 3);
+
+          idle = mixer.clipAction(idleAnim);
+          idle.play();
+
+          let clips = fileAnimations.filter(val => val.name !== "idle");
+          possibleAnims = clips.map(val => {
+            let clip = THREE.AnimationClip.findByName(clips, val.name);
+            clip.tracks.splice(3, 3);
+            clip.tracks.splice(9, 3);
+            clip = mixer.clipAction(clip);
+            return clip;
+          });
+        },
+        undefined, // We don't need this function
+        function(error) {
+          console.error(error);
+        }
+      );
+
+      // Add lights
+      let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
+      hemiLight.position.set(0, 50, 0);
+      // Add hemisphere light to scene
+      scene.add(hemiLight);
+
+      let geometry = new THREE.SphereGeometry(8, 32, 32);
+      let material = new THREE.MeshBasicMaterial({ color: 0x9bffaf }); // 0xf2ce2e
+      let sphere = new THREE.Mesh(geometry, material);
+      sphere.position.z = -15;
+      sphere.position.y = 2.5;
+      sphere.position.x = -0.25;
+      scene.add(sphere);
+
+      let d = 8.25;
+      let dirLight = new THREE.DirectionalLight(0xffffff, 0.54);
+      dirLight.position.set(-8, 12, 8);
+      // dirLight.castShadow = true;
+      dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
+      dirLight.shadow.camera.near = 0.1;
+      dirLight.shadow.camera.far = 1500;
+      dirLight.shadow.camera.left = d * -1;
+      dirLight.shadow.camera.right = d;
+      dirLight.shadow.camera.top = d;
+      dirLight.shadow.camera.bottom = d * -1;
+      // Add directional Light to scene
+      scene.add(dirLight);
+
+      // Floor
+      let floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
+      let floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0x001033,
+        shininess: 0
       });
 
-    svg.call(zoomObject);
+      let floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -0.5 * Math.PI;
+      // floor.receiveShadow = true;
+      floor.position.y = -10;
+      scene.add(floor);
+    };
 
-    const centerX = this.$refs.treeVisualization.getBoundingClientRect().width / 2;
-    const centerY = this.$refs.treeVisualization.getBoundingClientRect().height / 3;
-    const initialZoom = zoomIdentity.translate(centerX, centerY).scale(0.5);
-    svg.call(zoomObject.transform, initialZoom);
+    init();
+
+    function update() {
+      if (mixer) {
+        mixer.update(clock.getDelta());
+      }
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(update);
+    }
+
+    update();
+
+    window.addEventListener("click", e => raycast(e));
+    window.addEventListener("touchend", e => raycast(e, true));
+
+    function raycast(e, touch = false) {
+      var mouse = {};
+      if (touch) {
+        mouse.x = 2 * (e.changedTouches[0].clientX / window.innerWidth) - 1;
+        mouse.y = 1 - 2 * (e.changedTouches[0].clientY / window.innerHeight);
+      } else {
+        mouse.x = 2 * (e.clientX / window.innerWidth) - 1;
+        mouse.y = 1 - 2 * (e.clientY / window.innerHeight);
+      }
+      // update the picking ray with the camera and mouse position
+      raycaster.setFromCamera(mouse, camera);
+
+      // calculate objects intersecting the picking ray
+      var intersects = raycaster.intersectObjects(scene.children, true);
+
+      if (intersects[0]) {
+        var object = intersects[0].object;
+
+        if (object.name === "stacy") {
+          if (!currentlyAnimating) {
+            currentlyAnimating = true;
+            playOnClick();
+          }
+        }
+      }
+    }
+
+    // Get a random animation, and play it
+    function playOnClick() {
+      let anim = Math.floor(Math.random() * possibleAnims.length) + 0;
+      playModifierAnimation(idle, 0.25, possibleAnims[anim], 0.25);
+    }
+
+    function playModifierAnimation(from, fSpeed, to, tSpeed) {
+      to.setLoop(THREE.LoopOnce);
+      to.reset();
+      to.play();
+      from.crossFadeTo(to, fSpeed, true);
+      setTimeout(function() {
+        from.enabled = true;
+        to.crossFadeTo(from, tSpeed, true);
+        currentlyAnimating = false;
+      }, to._clip.duration * 1000 + (tSpeed + fSpeed) * 1000);
+    }
+
+    document.addEventListener("mousemove", function(e) {
+      var mousecoords = getMousePos(e);
+      if (neck && waist) {
+        moveJoint(mousecoords, neck, 50);
+        moveJoint(mousecoords, waist, 30);
+      }
+    });
+
+    function getMousePos(e) {
+      return { x: e.clientX, y: e.clientY };
+    }
+
+    function moveJoint(mouse, joint, degreeLimit) {
+      let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
+      joint.rotation.y = THREE.Math.degToRad(degrees.x);
+      joint.rotation.x = THREE.Math.degToRad(degrees.y);
+    }
+
+    function getMouseDegrees(x, y, degreeLimit) {
+      let dx = 0,
+        dy = 0,
+        xdiff,
+        xPercentage,
+        ydiff,
+        yPercentage;
+
+      let w = { x: window.innerWidth, y: window.innerHeight };
+
+      // Left (Rotates neck left between 0 and -degreeLimit)
+
+      // 1. If cursor is in the left half of screen
+      if (x <= w.x / 2) {
+        // 2. Get the difference between middle of screen and cursor position
+        xdiff = w.x / 2 - x;
+        // 3. Find the percentage of that difference (percentage toward edge of screen)
+        xPercentage = (xdiff / (w.x / 2)) * 100;
+        // 4. Convert that to a percentage of the maximum rotation we allow for the neck
+        dx = ((degreeLimit * xPercentage) / 100) * -1;
+      }
+      // Right (Rotates neck right between 0 and degreeLimit)
+      if (x >= w.x / 2) {
+        xdiff = x - w.x / 2;
+        xPercentage = (xdiff / (w.x / 2)) * 100;
+        dx = (degreeLimit * xPercentage) / 100;
+      }
+      // Up (Rotates neck up between 0 and -degreeLimit)
+      if (y <= w.y / 2) {
+        ydiff = w.y / 2 - y;
+        yPercentage = (ydiff / (w.y / 2)) * 100;
+        // Note that I cut degreeLimit in half when she looks up
+        dy = ((degreeLimit * 0.5 * yPercentage) / 100) * -1;
+      }
+
+      // Down (Rotates neck down between 0 and degreeLimit)
+      if (y >= w.y / 2) {
+        ydiff = y - w.y / 2;
+        yPercentage = (ydiff / (w.y / 2)) * 100;
+        dy = (degreeLimit * yPercentage) / 100;
+      }
+      return { x: dx, y: dy };
+    }
   }
 }
 
@@ -165,49 +387,49 @@ export default TreeVisualization;
 </script>
 
 <style lang="scss">
-  #treeVisualization {
-    background: black;
-    color: white;
-    font-family: sans-serif;
+#treeVisualization {
+  background: black;
+  color: white;
+  font-family: sans-serif;
 
-    #guide {
-      position: fixed;
-      top: 5%;
-      left: 5%;
-      text-align: left;
-      border: solid 2px #aaa;
-      border-radius: 5px;
-      padding: 10px;
+  #guide {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    text-align: left;
+    border: solid 2px #aaa;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    line.stem {
+      z-index: 100;
+    }
+    line.link {
+      z-index: 1;
     }
 
-    svg {
-      width: 100%;
-      height: 100%;
+    #zoomContainer rect {
+      width: 100vw;
+      height: 100vh;
+    }
 
-      line.stem {
-        z-index: 100;
-      }
-      line.link {
-        z-index: 1;
-      }
-
-      #zoomContainer rect {
-        width: 100vw;
-        height: 100vh;
-      }
-
-      .agentData {
-        p {
-          margin: 0;
-          padding: 0 10px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 100%;
-          transform: translate(-50%, -50%);
-          word-break: break-word;
-        }
+    .agentData {
+      p {
+        margin: 0;
+        padding: 0 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+        word-break: break-word;
       }
     }
   }
+}
 </style>
