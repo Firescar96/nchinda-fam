@@ -8,15 +8,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Component from 'vue-class-component';
-import { AgentModel, SMALLNESS_MULTIPLIER } from '@/models/AgentModel';
-import * as THREE from 'three/build/three.module.js';
+import * as THREE from 'three/build/three.module';
 //GLTFLoader does not save branch rotations properly
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import AgentStore from '@/stores/AgentStore';
-
-const BASE_NODE_RADIUS = 120;
 
 @Component
 class TreeVisualization {
@@ -31,82 +26,12 @@ class TreeVisualization {
     };
   }
 
-  //async created() {
-  ////get the latest family tree data from the server
-  //let dataLocation = `http://${window.location.hostname}`;
-  //if (window.location.hostname == "localhost") {
-  //dataLocation += ":8080";
-  //}
-  //dataLocation += "/agent/metadata";
-  //const { data } = await axios.get(dataLocation);
-
-  ////parse the data to update nodes/links in the graph
-  //this.nodes = data.result.map(x => new AgentModel(x));
-  //this.nodes.forEach(node => {
-  //AgentStore.objectsById[node.id] = node;
-  //});
-
-  //const topLevelNodes = new Set(this.nodes.map(x => x.id));
-
-  //const links = [];
-  //this.nodes.forEach(node => {
-  //node.children = node.children.map(x => AgentStore.objectsById[x]);
-
-  //node.children.forEach(child => {
-  //child.parent = node;
-  //child.depth = node.depth + 1;
-  //topLevelNodes.delete(child.id);
-  //links.push({ source: node, target: child });
-  //});
-  //});
-  //this.links = links;
-
-  ////tie together top level nodes so they don't drift too far apart
-  //const rootNode = new AgentModel({
-  //name: "root",
-  //id: "root",
-  //children: []
-  //});
-
-  //this.nodes.push(rootNode);
-  //topLevelNodes.forEach(nodeId => {
-  //const node = AgentStore.objectsById[nodeId];
-  //rootNode.children.push(node);
-  //this.links.push({ source: rootNode, target: node });
-  //node.parent = rootNode;
-  //});
-
-  //rootNode.recomputePositions();
-  //}
   animate() {
     requestAnimationFrame(this.animate);
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
     this.renderer.render(this.scene, this.camera);
   }
-
-  //mounted() {
-  //this.scene = new THREE.Scene();
-  //this.camera = new THREE.PerspectiveCamera(
-  //75,
-  //window.innerWidth / window.innerHeight,
-  //0.1,
-  //1000
-  //);
-
-  //this.renderer = new THREE.WebGLRenderer();
-  //this.renderer.setSize(window.innerWidth, window.innerHeight);
-  //this.$refs.treeVisualization.appendChild(this.renderer.domElement);
-
-  //var geometry = new THREE.BoxGeoetry(1, 1, 1);
-  //var material = new THREE.MeshBasicMaterial({ color: 0xad0202 });
-  //this.cube = new THREE.Mesh(geometry, material);
-  //this.scene.add(this.cube);
-
-  //this.camera.position.z = 5;
-
-  //this.animate();
-  //}
 
   mounted() {
     //Set our main variables
@@ -143,7 +68,7 @@ class TreeVisualization {
         1000,
       );
 
-      const MODEL_PATH = 'http://localhost:8081/static/treesection-rendered.obj';
+      const MODEL_PATH = 'http://localhost:8080/treesection-rendered.obj';
 
       const loader = new OBJLoader();
 
@@ -156,8 +81,8 @@ class TreeVisualization {
             modelChild.castShadow = true;
             modelChild.receiveShadow = true;
 
-            const barkTexture = THREE.ImageUtils.loadTexture('http://localhost:8081/static/FabricRope001_COL_2K.jpg');
-            const barkDisplacement = THREE.ImageUtils.loadTexture('http://localhost:8081/static/FabricRope001_DISP_2K.jpg');
+            const barkTexture = THREE.ImageUtils.loadTexture('http://localhost:8080/FabricRope001_COL_2K.jpg');
+            const barkDisplacement = THREE.ImageUtils.loadTexture('http://localhost:8080/FabricRope001_DISP_2K.jpg');
 
             const material = new THREE.MeshPhongMaterial({
               map: barkTexture,
@@ -167,7 +92,6 @@ class TreeVisualization {
             const mesh = new THREE.Mesh(modelChild.geometry, material);
             scene.add(mesh);
           });
-
 
           scene.add(model);
         },
@@ -241,9 +165,6 @@ class TreeVisualization {
 
     update();
 
-    window.addEventListener('click', (e) => raycast(e));
-    window.addEventListener('touchend', (e) => raycast(e, true));
-
     function raycast(e, touch = false) {
       const mouse = {};
       if(touch) {
@@ -265,6 +186,9 @@ class TreeVisualization {
         //TODO animate
       }
     }
+
+    window.addEventListener('click', (e) => raycast(e));
+    window.addEventListener('touchend', (e) => raycast(e, true));
   }
 }
 

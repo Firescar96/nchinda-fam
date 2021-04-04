@@ -1,3 +1,29 @@
-# nchinda.com nchinda.africa
+# website
 
-[Project Tracker](https://www.notion.so/cedeae75d48c4a739869e90cdd06ba12?v=7a1a89f1f253444da8f750cad69ce2a1)
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
