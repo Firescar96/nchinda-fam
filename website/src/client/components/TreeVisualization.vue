@@ -68,12 +68,13 @@ class TreeVisualization {
         1000,
       );
 
-      const MODEL_PATH = 'http://localhost:8080/treesection-rendered.obj';
+      const route = new URL(window.location.href);
+      route.pathname = '/treesection-rendered.obj';
 
       const loader = new OBJLoader();
 
       loader.load(
-        MODEL_PATH,
+        route.href,
         (model) => {
           model.traverse((modelChild) => {
             if(!modelChild.isMesh) return;
@@ -81,8 +82,10 @@ class TreeVisualization {
             modelChild.castShadow = true;
             modelChild.receiveShadow = true;
 
-            const barkTexture = THREE.ImageUtils.loadTexture('http://localhost:8080/FabricRope001_COL_2K.jpg');
-            const barkDisplacement = THREE.ImageUtils.loadTexture('http://localhost:8080/FabricRope001_DISP_2K.jpg');
+            route.pathname = '/FabricRope001_COL_2K.jpg';
+            const barkTexture = THREE.ImageUtils.loadTexture(route.href);
+            route.pathname = 'FabricRope001_DISP_2K.jpg';
+            const barkDisplacement = THREE.ImageUtils.loadTexture(route.href);
 
             const material = new THREE.MeshPhongMaterial({
               map: barkTexture,

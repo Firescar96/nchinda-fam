@@ -1,13 +1,13 @@
-const Agent = require('models/Agent.js');
+//const Agent = require('models/Agent.js');
 
 const router = function (instance, opts, done) {
-    instance.get('/metadata', async function (request, reply) {
-        const agents = await Agent.find({});
-        const jsonData = agents.map(x => x.toJSON())
-        reply.send({ result: jsonData })
-    })
+//instance.get('/metadata', async (request, reply) => {
+//const agents = await Agent.find({});
+//const jsonData = agents.map((x) => x.toJSON());
+//reply.send({ result: jsonData });
+//});
 
-    done()
-}
+  done();
+};
 
-module.exports = router
+module.exports = router;
