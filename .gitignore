@@ -22,3 +22,7 @@ yarn-error.log*
 
 static/*
 blender/blends/untracked
+
+public/*
+cert.pem
+privkey.pem
