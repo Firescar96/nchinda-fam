@@ -144,6 +144,16 @@ class TreeVisualization {
       //floor.receiveShadow = true;
       floor.position.y = -10;
       scene.add(floor);
+
+      function onDocumentMouseWheel(event) {
+        const fovMAX = 160;
+        const fovMIN = 1;
+
+        camera.fov -= event.wheelDeltaY * 0.05;
+        camera.fov = Math.max(Math.min(camera.fov, fovMAX), fovMIN);
+        camera.updateProjectionMatrix();
+      }
+      document.addEventListener('mousewheel', onDocumentMouseWheel, false);
     };
 
     init();

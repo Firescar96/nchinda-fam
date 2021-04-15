@@ -36,7 +36,7 @@ class Agent():
             dst.objects = [x for x in desired_objects]
 
         for obj_name in desired_objects:
-            obj = bpy.data.objects.get(obj_name)
+            obj = bpy.data.objects.get(obj_name).copy()
             obj.name = obj_name + self.id
             collection.objects.link(obj)
             self.blender_objects[obj_name] = obj
